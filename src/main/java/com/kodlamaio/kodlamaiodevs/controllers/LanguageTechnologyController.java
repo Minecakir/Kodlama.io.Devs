@@ -2,12 +2,10 @@ package com.kodlamaio.kodlamaiodevs.controllers;
 
 import com.kodlamaio.kodlamaiodevs.business.abstracts.LanguageTechnologyService;
 import com.kodlamaio.kodlamaiodevs.business.requests.languageTechnology.CreateLanguageTechnologyRequest;
+import com.kodlamaio.kodlamaiodevs.business.requests.languageTechnology.DeleteLanguageTechnologyRequest;
 import com.kodlamaio.kodlamaiodevs.entities.LanguageTechnology;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,4 +26,7 @@ public class LanguageTechnologyController {
 
     @PostMapping("/add")
     public void add(CreateLanguageTechnologyRequest createLanguageTechnologyRequest) throws Exception {this.languageTechnologyService.add(createLanguageTechnologyRequest);}
+
+    @DeleteMapping("/delete")
+    public void delete(DeleteLanguageTechnologyRequest deleteLanguageTechnologyRequest)throws Exception{this.languageTechnologyService.delete(deleteLanguageTechnologyRequest);}
 }
