@@ -3,6 +3,7 @@ package com.kodlamaio.kodlamaiodevs.business.concretes;
 import com.kodlamaio.kodlamaiodevs.business.abstracts.LanguageTechnologyService;
 import com.kodlamaio.kodlamaiodevs.business.requests.languageTechnology.CreateLanguageTechnologyRequest;
 import com.kodlamaio.kodlamaiodevs.business.requests.languageTechnology.DeleteLanguageTechnologyRequest;
+import com.kodlamaio.kodlamaiodevs.business.requests.languageTechnology.UpdateLanguageTechnologyRequest;
 import com.kodlamaio.kodlamaiodevs.dataAccess.abstracts.LanguageTechnologyRepository;
 import com.kodlamaio.kodlamaiodevs.dataAccess.abstracts.ProgrammingLanguageRepository;
 import com.kodlamaio.kodlamaiodevs.entities.LanguageTechnology;
@@ -51,5 +52,17 @@ public class LanguageTechnologyManager implements LanguageTechnologyService {
         }
         else{throw new Exception("Language Technology not found.");}
 
+    }
+
+    @Override
+    public void update(UpdateLanguageTechnologyRequest updateLanguageTechnologyRequest, Integer id) throws Exception {
+        if(this.languageTechnologyRepository.existsById(id)){
+            LanguageTechnology updatedLanguageTec = languageTechnologyRepository.getLanguageTechnologyById(id);
+            updatedLanguageTec.setName(updateLanguageTechnologyRequest.getName());
+            this.languageTechnologyRepository.save(updatedLanguageTec);
+        }
+        else{
+            throw new Exception("Language Technology has been not found.");
+        }
     }
 }
