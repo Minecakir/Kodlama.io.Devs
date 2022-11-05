@@ -1,8 +1,9 @@
 package com.kodlamaio.kodlamaiodevs.business.concretes;
 
 import com.kodlamaio.kodlamaiodevs.business.abstracts.ProgrammingLanguageService;
-import com.kodlamaio.kodlamaiodevs.business.requests.CreateProgrammingLanguageRequest;
-import com.kodlamaio.kodlamaiodevs.business.requests.UpdateProgrammingLanguagesRequests;
+import com.kodlamaio.kodlamaiodevs.business.requests.programmingLanguage.CreateProgrammingLanguageRequest;
+import com.kodlamaio.kodlamaiodevs.business.requests.programmingLanguage.DeleteProgrammingLanguageRequest;
+import com.kodlamaio.kodlamaiodevs.business.requests.programmingLanguage.UpdateProgrammingLanguagesRequest;
 import com.kodlamaio.kodlamaiodevs.business.responses.GetAllProgrammingLanguagesResponse;
 import com.kodlamaio.kodlamaiodevs.dataAccess.abstracts.ProgrammingLanguageRepository;
 import com.kodlamaio.kodlamaiodevs.entities.ProgrammingLanguage;
@@ -57,22 +58,28 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
     }
 
     @Override
-    public void delete(ProgrammingLanguage programmingLanguage) throws Exception{
+    public void delete(DeleteProgrammingLanguageRequest deleteProgrammingLanguageRequest) throws Exception{
 
-        if(this.programmingLanguageRepository.existsById(programmingLanguage.getId()) && this.programmingLanguageRepository.existsByName(programmingLanguage.getName()))
+        ProgrammingLanguage language = programmingLanguageRepository.getProgrammingLanguageById(deleteProgrammingLanguageRequest.getId());
+        if(this.programmingLanguageRepository.existsById(deleteProgrammingLanguageRequest.getId()) && this.programmingLanguageRepository.existsByName(deleteProgrammingLanguageRequest.getName()))
         {
-            this.programmingLanguageRepository.delete(programmingLanguage);
+            this.programmingLanguageRepository.delete(language);
         }
-        throw new Exception("Language has been not found.");
+        else{
+            throw new Exception("Language has been not found.");
+        }
     }
 
     /*Enter id and update ProgrammingLanguage name*/
     @Override
-    public void update(UpdateProgrammingLanguagesRequests updateProgrammingLanguagesRequests, Integer id) {
+    public void update(UpdateProgrammingLanguagesRequest updateProgrammingLanguagesRequest, Integer id) throws Exception {
         if(this.programmingLanguageRepository.existsById(id)){
             ProgrammingLanguage updatedProgLanguage = programmingLanguageRepository.getProgrammingLanguageById(id);
-            updatedProgLanguage.setName(updateProgrammingLanguagesRequests.getName());
+            updatedProgLanguage.setName(updateProgrammingLanguagesRequest.getName());
             this.programmingLanguageRepository.save(updatedProgLanguage);
+        }
+        else{
+            throw new Exception("Language has been not found.");
         }
     }
 }

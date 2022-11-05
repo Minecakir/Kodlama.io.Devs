@@ -1,8 +1,9 @@
 package com.kodlamaio.kodlamaiodevs.controllers;
 
 import com.kodlamaio.kodlamaiodevs.business.abstracts.ProgrammingLanguageService;
-import com.kodlamaio.kodlamaiodevs.business.requests.CreateProgrammingLanguageRequest;
-import com.kodlamaio.kodlamaiodevs.business.requests.UpdateProgrammingLanguagesRequests;
+import com.kodlamaio.kodlamaiodevs.business.requests.programmingLanguage.CreateProgrammingLanguageRequest;
+import com.kodlamaio.kodlamaiodevs.business.requests.programmingLanguage.DeleteProgrammingLanguageRequest;
+import com.kodlamaio.kodlamaiodevs.business.requests.programmingLanguage.UpdateProgrammingLanguagesRequest;
 import com.kodlamaio.kodlamaiodevs.business.responses.GetAllProgrammingLanguagesResponse;
 import com.kodlamaio.kodlamaiodevs.entities.ProgrammingLanguage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/softwlanguages")
+@RequestMapping("/api/programminglanguages")
 public class ProgrammingLanguageController {
     private ProgrammingLanguageService programmingLanguageService;
 
@@ -32,8 +33,8 @@ public class ProgrammingLanguageController {
     public ProgrammingLanguage getById(Integer id)throws Exception{return this.programmingLanguageService.getById(id);}
 
     @DeleteMapping("/delete")
-    public void  delete(ProgrammingLanguage programmingLanguage)throws Exception{this.programmingLanguageService.delete(programmingLanguage);}
+    public void  delete(DeleteProgrammingLanguageRequest deleteProgrammingLanguageRequest)throws Exception{this.programmingLanguageService.delete(deleteProgrammingLanguageRequest);}
 
     @PutMapping("/update")
-    public void update(UpdateProgrammingLanguagesRequests updateProgrammingLanguagesRequests, Integer id){this.programmingLanguageService.update(updateProgrammingLanguagesRequests,id);}
+    public void update(UpdateProgrammingLanguagesRequest updateProgrammingLanguagesRequest, Integer id)throws Exception{this.programmingLanguageService.update(updateProgrammingLanguagesRequest,id);}
 }
