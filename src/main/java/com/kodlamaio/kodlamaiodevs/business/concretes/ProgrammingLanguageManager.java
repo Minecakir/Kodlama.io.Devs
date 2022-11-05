@@ -44,6 +44,7 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
         if(this.programmingLanguageRepository.existsByName(createProgrammingLanguageRequest.getName())) {
             throw new Exception("Language has already exist");
         }
+        else if(createProgrammingLanguageRequest.getName()==null){throw new Exception("Language can not be empty.");}
         language.setName(createProgrammingLanguageRequest.getName());
         this.programmingLanguageRepository.save(language);
     }

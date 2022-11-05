@@ -23,8 +23,8 @@ public class ProgrammingLanguage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
-    @NotBlank
+    @NotBlank()
+    @NotNull()
     @Column(name = "name", nullable = false)
     private String name;
 

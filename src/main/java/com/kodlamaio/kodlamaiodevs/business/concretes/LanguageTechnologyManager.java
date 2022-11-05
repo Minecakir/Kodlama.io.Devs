@@ -34,7 +34,7 @@ public class LanguageTechnologyManager implements LanguageTechnologyService {
         if(this.languageTechnologyRepository.existsByName(createLanguageTechnologyRequest.getName())) {
             throw new Exception("Language technology has already exist");
         }
-        else if(this.languageTechnologyRepository.existsById(createLanguageTechnologyRequest.getLanguage_id()))
+        else if(this.programmingLanguageRepository.existsById(createLanguageTechnologyRequest.getLanguage_id()))
         {
             languageTechnology.setName(createLanguageTechnologyRequest.getName());
             languageTechnology.setProgrammingLanguage(programmingLanguage);
@@ -51,7 +51,6 @@ public class LanguageTechnologyManager implements LanguageTechnologyService {
             this.languageTechnologyRepository.delete(technology);
         }
         else{throw new Exception("Language Technology not found.");}
-
     }
 
     @Override
